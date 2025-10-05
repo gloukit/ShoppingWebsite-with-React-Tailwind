@@ -1,70 +1,12 @@
-# Getting Started with Create React App
+##### 基于原项目的改进：
+1、使用 fetch 从 DummyJSON API 获取产品数据，配合 React 状态管理，实现了前端异步数据请求和渲染，使项目更接近真实项目场景；
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+2、将产品数据提升到Redux，实现全局管理，同时使用url动态拼接，方便支持后续的分类、搜索、分页功能；
+进一步拓展：由于列表渲染和查找单个商品的详情数据再进行渲染的数据处理逻辑不同，未免产品数据互相覆盖影响，拆分为2个slice，分别负责“列表”和“详情”数据的保存和处理：
+（1）productsListSlice：首页、分类、搜索的列表；
+（2）productDetailSlice：用于查找单个产品详情，适用于详情页、购物车；
+（3）这样每个 slice 都只有一个任务，调试起来也不会出现“首页 dispatch 覆盖了详情页数据”这种尴尬情况（看如何将描述改得更为专业）
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3、Detail 详情页的数据请求与筛选，分情况处理：
+（1）从首页点进去详情页 → 优先用现有 Redux 数据，使用 .find()筛选；
+（2）直接访问详情页（没数据时） → 再用 fetch 重新拉取数据，并从中筛选。
