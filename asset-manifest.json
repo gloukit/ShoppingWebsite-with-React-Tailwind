@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ShoppingWebsite-with-React-Tailwind/static/css/main.7dae76a5.css",
+    "main.js": "/ShoppingWebsite-with-React-Tailwind/static/js/main.74b9712e.js",
+    "index.html": "/ShoppingWebsite-with-React-Tailwind/index.html",
+    "main.7dae76a5.css.map": "/ShoppingWebsite-with-React-Tailwind/static/css/main.7dae76a5.css.map",
+    "main.74b9712e.js.map": "/ShoppingWebsite-with-React-Tailwind/static/js/main.74b9712e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7dae76a5.css",
+    "static/js/main.74b9712e.js"
+  ]
+}
