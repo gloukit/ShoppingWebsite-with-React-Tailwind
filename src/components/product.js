@@ -1,5 +1,5 @@
 import { ShoppingCart } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart } from "../store/cartSlice";
 
@@ -26,7 +26,7 @@ export default function Product(props){
         <div className="flex justify-between items-center">
             <p className="text-lg font-medium">${price}</p>
             <button className="bg-gray-300 rounded-md p-2 text-sm
-                               flex gap-3
+                               flex gap-2
                                hover:bg-gray-200"
                     onClick={handleAddToCart}>
                 <ShoppingCart className="size-5"/>

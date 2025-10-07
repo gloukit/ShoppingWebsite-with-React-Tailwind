@@ -7,11 +7,11 @@ export default function Layout(){
     const statusTab = useSelector(state=>state.cart.statusTab);
 
     return (
-        <div className="bg-zinc-100 h-full ">
-            <main className={`max-w-full w-[1200px] m-auto px-20 py-10
+        <div className="bg-zinc-100 h-screen">
+            <main className={`max-w-full w-[1100px] m-auto px-12 pb-8
                              transform transition-transform duration-500
-                             ${statusTab===false? "" : "-translate-x-[200px]" }`}>
-                <Header />
+                             ${statusTab===false? "" : "-translate-x-[220px]" }`}>
+                <Header/>
                 <Outlet/>
             </main>
             <CartTab/>

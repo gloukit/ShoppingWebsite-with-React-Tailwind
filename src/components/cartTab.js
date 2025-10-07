@@ -14,7 +14,7 @@ export default function CartTab(){
     
     return (
         <div className={`fixed top-0 right-0
-                        w-[400px] h-full bg-gray-700 shadow-2xl
+                        w-[450px] h-full bg-gray-700 shadow-2xl
                         grid grid-rows-[60px_1fr_60px]
                         overflow-auto
                         transform transition-transform duration-500

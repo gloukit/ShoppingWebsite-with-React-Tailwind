@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchProductDetail } from "../store/productDetailSlice";
-import { changeQuantity } from "../store/cartSlice";
+import { changeQuantity, removeFromCart } from "../store/cartSlice";
+import { Trash2Icon } from "lucide-react";
 
 
 export default function CartItem(props){
@@ -36,20 +38,32 @@ export default function CartItem(props){
     }
 
     return (
-        <div className="grid grid-cols-[2fr,4fr,3.5fr,2fr] justify-between items-center gap-5
+        <div className="grid grid-cols-[2fr,4fr,3fr,2fr,1fr] justify-between items-center gap-5
                         bg-slate-600 rounded-md 
                         border-b-2 border-slate-700
-                        text-white py-3 px-4">
+                        text-white py-3 px-3">
             {product && (
                 <>
-                    <img src={product.thumbnail} alt={product.title} className="bg-black"/>
-                    <h3>{product.title}</h3>
+                    <Link to={`${product.id}`}>
+                        <img className="hover:bg-gray-500 rounded-md" src={product.thumbnail} alt={product.title} />
+                    </Link>
+
+                    <Link to={`${product.id}`}>
+                        <h3 className="hover:text-gray-300">{product.title}</h3>                    
+                    </Link>
+ 
                     <p>${(product.price * quantity).toFixed(2)}</p>
+
                     <div className="w-20 flex justify-between gap-2">
                         <button className="w-6 h-6 bg-gray-200 rounded-full text-cyan-600 font-bold" onClick={handleMinusQuantity}>-</button>
                         <span>{quantity}</span>
                         <button className="w-6 h-6 bg-gray-200 rounded-full text-cyan-600 font-bold" onClick={handlePlusQuantity}>+</button>
+                    
                     </div>
+
+                    <button onClick={()=>dispatch(removeFromCart({productId:productId,quantity:quantity}))}>
+                        <Trash2Icon className="size-4 cursor-pointer hover:text-gray-400"/>
+                    </button>
                 </>
             )}
         </div>

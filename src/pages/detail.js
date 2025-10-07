@@ -42,13 +42,13 @@ export default function Detail(){
     }
 
     return (
-        <div className="min-h-[550px] bg-gray-100 py-5 px-12">
-            <h2 className="text-3xl text-center">Product Detail</h2>
+        <div className="py-5">
+            <h2 className="text-3xl">Product Detail</h2>
             {product ? (
                 <div className="grid md:grid-cols-2 gap-8 mt-6">
                     <div>
                         <img src={product.thumbnail} alt={product.title} 
-                             className="w-full h-[380px] bg-gray-200 object-contain"/>
+                             className="w-full h-[380px] object-contain"/>
                     </div>
 
                     <div className="flex flex-col gap-6">
