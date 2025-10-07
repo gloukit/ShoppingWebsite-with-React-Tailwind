@@ -1,4 +1,5 @@
 ### 基于原项目的优化改进 Project Improvements
+* 参考项目源码：https://github.com/HoanghoDev/youtube_v2/tree/main/add-to-cart-react
 #### 数据请求与管理 Data Fetching and State Management
 1. **引入虚拟后端，提高项目真实性**  Virtual Backend for Realistic Data Flow
   * 使用 DummyJSON API 作为模拟数据源，通过 `fetch` 实现前端异步数据请求与渲染，完整模拟真实项目中的后端交互流程。
