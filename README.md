@@ -7,7 +7,8 @@
     * Integrated the DummyJSON API as a simulated backend.
     * Data is fetched via fetch() and rendered asynchronously, providing a development experience closer to real-world backend interaction.
 
-~~2. **状态提升与模块化管理（Redux）** State Elevation and Modular Redux Architecture
+~~
+2. **状态提升与模块化管理（Redux）** State Elevation and Modular Redux Architecture
   * 将产品数据与单个产品详情数据统一提升至 Redux，全局可访问。
     * Product list data and single product details are managed globally via Redux.
   * 为避免不同视图间的数据相互覆盖，采用**职责单一的双 Slice 架构**：
@@ -22,7 +23,8 @@
   * 将分页页码、搜索关键词、分类筛选等 URL 参数纳入 Redux 管理，通过 slice 统一同步路由状态，实现分页、搜索、分类功能的解耦与协同更新。
     * Pagination, search keywords, and category filters are stored and managed in Redux.The slice synchronizes these query parameters with the URL, enabling consistent state across routing and seamless interaction between pagination, search, and filtering.
   * 同时增加全局参数重置逻辑，确保切换功能模块时状态一致。
-    * Added a global reset mechanism to clear parameters when switching between views.~~
+    * Added a global reset mechanism to clear parameters when switching between views.
+~~
 
 *利用TanStack Query重构数据管理方式*
 2. **数据管理架构（React Query + URL Params + Minimal Redux）** Data Management Architecture
@@ -32,7 +34,7 @@
   * 列表与详情数据天然隔离（基于 queryKey）
     * Natural Data Isolation Between List & Detail via queryKey.
   2) URL与页面状态双向同步 Two-Way Sync Between URL and UI State
-  3) Redux只用于UI状态以及购物车数据的管理 Redux restricted to UI state and stata of shopping cart only
+  3) Redux只用于UI状态以及购物车数据的管理 Redux restricted to UI state and shopping cart data only
   * 剥离 API 逻辑后，Redux 只负责管理购物车本地状态，以及UI 开关、面板控制。
     * After removing API concerns, Redux now only stores local cart state and UI toggles、view states.
 
