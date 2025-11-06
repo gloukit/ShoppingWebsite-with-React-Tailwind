@@ -1,13 +1,13 @@
-### 基于原项目的优化改进 Project Improvements
+## 基于原项目的优化改进 Project Improvements
 * 参考项目源码：https://github.com/HoanghoDev/youtube_v2/tree/main/add-to-cart-react
 
-#### 数据请求与管理 Data Fetching and State Management
+### 数据请求与管理 Data Fetching and State Management
 1. **引入虚拟后端，提高项目真实性**  Virtual Backend for Realistic Data Flow
   * 使用 DummyJSON API 作为模拟数据源，通过 `fetch` 实现前端异步数据请求与渲染，完整模拟真实项目中的后端交互流程。
     * Integrated the DummyJSON API as a simulated backend.
     * Data is fetched via fetch() and rendered asynchronously, providing a development experience closer to real-world backend interaction.
 
-~~
+<s>
 2. **状态提升与模块化管理（Redux）** State Elevation and Modular Redux Architecture
   * 将产品数据与单个产品详情数据统一提升至 Redux，全局可访问。
     * Product list data and single product details are managed globally via Redux.
@@ -23,10 +23,10 @@
   * 将分页页码、搜索关键词、分类筛选等 URL 参数纳入 Redux 管理，通过 slice 统一同步路由状态，实现分页、搜索、分类功能的解耦与协同更新。
     * Pagination, search keywords, and category filters are stored and managed in Redux.The slice synchronizes these query parameters with the URL, enabling consistent state across routing and seamless interaction between pagination, search, and filtering.
   * 同时增加全局参数重置逻辑，确保切换功能模块时状态一致。
-    * Added a global reset mechanism to clear parameters when switching between views.
-~~
+    * Added a global reset mechanism to clear parameters when switching between views.  
+</s>
 
-*利用TanStack Query重构数据管理方式*
+#### 【二次优化：利用TanStack Query重构数据管理方式】
 2. **数据管理架构（React Query + URL Params + Minimal Redux）** Data Management Architecture
   1) React Query 管理所有服务器数据 React Query for All Server-State
   * 从原本的RTK数据管理方式，优化为 TanStack Query驱动的API状态管理
@@ -38,7 +38,7 @@
   * 剥离 API 逻辑后，Redux 只负责管理购物车本地状态，以及UI 开关、面板控制。
     * After removing API concerns, Redux now only stores local cart state and UI toggles、view states.
 
-#### 新增功能与交互优化 New Features & Interaction Enhancements
+### 新增功能与交互优化 New Features & Interaction Enhancements
 1. **搜索功能 Search**：
   * 支持根据关键词实时筛选产品。
     * filter products by keyword.
