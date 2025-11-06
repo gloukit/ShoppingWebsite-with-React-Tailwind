@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CartItem from "./cartItem";
 import { toggleStatusTab } from "../store/cartSlice";
@@ -11,6 +10,7 @@ export default function CartTab(){
     function handleCLoseCartTab(){
         dispatch(toggleStatusTab());
     }
+    console.log("carTab",cartData)
     
     return (
         <div className={`fixed top-0 right-0

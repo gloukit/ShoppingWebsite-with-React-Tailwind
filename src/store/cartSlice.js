@@ -34,6 +34,7 @@ const cartSlice = createSlice({
         removeFromCart(state,action){
             const {productId} = action.payload;
             state.items = state.items.filter(item=>item.productId !== productId);
+            localStorage.setItem("carts", JSON.stringify(state.items));
         },
 
         toggleStatusTab(state){

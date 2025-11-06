@@ -2,29 +2,27 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom"
 import { addToCart } from "../store/cartSlice";
-import { fetchProductDetail } from "../store/productDetailSlice";
+import { useQuery } from "@tanstack/react-query";
+import { productAPI } from "../api/product_api";
 
 export default function Detail(){
     const {id} = useParams();
-    const product = useSelector(state => state.productDetail.items[id]);
-    const status = useSelector(state => state.productDetail.status[id]);
-    const dispatch = useDispatch();
-   
-    const navigate = useNavigate();
     const [quantity,setQuantity] = useState(1);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //根据id发送请求拉取数据
-    useEffect(()=>{
-        dispatch(fetchProductDetail(id));
-    },[id, dispatch]);
+    const {data:product,isLoading} = useQuery({
+        queryKey:["product",id],
+        queryFn:()=>productAPI.getProduct({id})
+    })
     
     //加载完成后，检查获取到的数据是否为空
     useEffect(()=>{
-       if(status==="succeeded" && !product){
+       if(!isLoading && !product){
         navigate("/");
        }
-    },[status,product,navigate]);
-    
+    },[isLoading,product,navigate]);
 
     function handleMinusQuantity(){
         setQuantity(prev=>(prev-1<1? 1 : prev-1));
@@ -40,6 +38,8 @@ export default function Detail(){
             quantity : quantity
         }))
     }
+
+    if(!isLoading){console.log("detail",product)}
 
     return (
         <div className="py-5">

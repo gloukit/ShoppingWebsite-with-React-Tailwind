@@ -14,7 +14,6 @@ export default function Product(props){
         }));
     }
 
-
    return (
     <div className="bg-white p-5 rounded-xl shadow-lg
                     flex flex-col justify-between gap-5">

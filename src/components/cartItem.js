@@ -1,27 +1,26 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchProductDetail } from "../store/productDetailSlice";
 import { changeQuantity, removeFromCart } from "../store/cartSlice";
 import { Trash2Icon } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { productAPI } from "../api/product_api";
 
 
 export default function CartItem(props){
     const {productId,quantity} = props.data;
-    const product = useSelector(state=>state.productDetail.items[productId]);
-    const status = useSelector(state=>state.productDetail.status[productId]);
+    const id = productId.toString();
+
+    const {data:product, isLoading }= useQuery({
+        queryKey:["product",id],
+        queryFn: ()=>productAPI.getProduct({id})
+    })
     const dispatch = useDispatch();
 
-    useEffect(()=>{
-        if(!product){ //如果product的详情数据为空，则拉取数据
-            dispatch(fetchProductDetail(productId));
-        }
-    },[dispatch,productId,product]);
-
-    if(!product && status==="loading"){
+    if(!product && isLoading){
         return <p>Loading......</p>;
     }
-    console.log(product);
+
+    if (!isLoading) {console.log("购物车单项",product);}
 
     function handleMinusQuantity(){
         dispatch(changeQuantity({
@@ -61,7 +60,7 @@ export default function CartItem(props){
                     
                     </div>
 
-                    <button onClick={()=>dispatch(removeFromCart({productId:productId,quantity:quantity}))}>
+                    <button onClick={()=>dispatch(removeFromCart({productId,quantity}))}>
                         <Trash2Icon className="size-4 cursor-pointer hover:text-gray-400"/>
                     </button>
                 </>
